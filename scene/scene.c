@@ -18,6 +18,7 @@ Scene* New_Scene(int label) {
     return scene;
 }
 
+
 void _Register_elements(Scene* sc, Elements* ele) {
     if (sc->ele_num >= MAX_ELEMENT) return;
 

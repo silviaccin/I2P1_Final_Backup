@@ -27,6 +27,7 @@ void player_update(Player* p) {
     ALLEGRO_KEYBOARD_STATE keyState;
     al_get_keyboard_state(&keyState);
 
+    //player 座標更新
     if (al_key_down(&keyState, ALLEGRO_KEY_UP))
         p->y -= p->speed;
     if (al_key_down(&keyState, ALLEGRO_KEY_DOWN))
@@ -36,7 +37,7 @@ void player_update(Player* p) {
     if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT))
         p->x += p->speed;
 
-    //邊界限制判斷
+    //邊界限制
     if (p->x < 0)
         p->x = 0;
     if (p->y < 0)

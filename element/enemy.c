@@ -12,8 +12,6 @@ Enemy* New_Enemy(EnemyType type, int direction) {
     e->alive = true;
     e->speed = 2.0;
     e->entered_screen = false;  //初始化為尚未進入畫面
-
-
     e->sprite = al_load_bitmap("assets/images/enemy3.png");
     GAME_ASSERT(e->sprite);
 

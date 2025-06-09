@@ -18,21 +18,21 @@ typedef struct {
 
 void menu_draw(Scene* sc) {
     Menu* menu = (Menu*)(sc->pDerivedObj);
-    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_clear_to_color(al_map_rgb(0, 0, 0)); //黑色
 
-    ALLEGRO_COLOR active = al_map_rgb(255, 255, 0);
-    ALLEGRO_COLOR inactive = al_map_rgb(150, 150, 150);
+    ALLEGRO_COLOR active = al_map_rgb(255, 255, 0); //黃色
+    ALLEGRO_COLOR inactive = al_map_rgb(150, 150, 150); //灰色
 
     if (menu->background) {
         al_draw_scaled_bitmap(
-        menu->background,
-        0, 0,
-        al_get_bitmap_width(menu->background),
-        al_get_bitmap_height(menu->background),
-        0, 0,
-        WINDOW_WIDTH, WINDOW_HEIGHT,
-        0
-    );
+            menu->background,
+            0, 0,
+            al_get_bitmap_width(menu->background),
+            al_get_bitmap_height(menu->background),
+            0, 0,
+            WINDOW_WIDTH, WINDOW_HEIGHT,
+            0
+        );
     } else {
         al_clear_to_color(al_map_rgb(0, 0, 0));
     }
@@ -40,7 +40,7 @@ void menu_draw(Scene* sc) {
     al_draw_text(menu->font, menu->selected == 0 ? active : inactive, 400, 250, ALLEGRO_ALIGN_CENTER, "START");
     al_draw_text(menu->font, menu->selected == 1 ? active : inactive, 400, 300, ALLEGRO_ALIGN_CENTER, "EXIT");
 
-    al_flip_display();
+    al_flip_display(); //display
 }
 
 void menu_update(Scene* sc) {
@@ -48,8 +48,8 @@ void menu_update(Scene* sc) {
 
     ALLEGRO_EVENT ev;
     while (al_get_next_event(event_queue, &ev)) {
-        if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            game_running = false;
+        if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //關閉視窗
+            game_running = false; 
         } else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (ev.keyboard.keycode) {
                 case ALLEGRO_KEY_DOWN:
