@@ -36,7 +36,7 @@ void player_update(Player* p) {
     if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT))
         p->x += p->speed;
 
-    // ✅ 邊界限制判斷
+    //邊界限制判斷
     if (p->x < 0)
         p->x = 0;
     if (p->y < 0)
@@ -48,17 +48,17 @@ void player_update(Player* p) {
 }
 
 void player_draw(Player* p) {
-    float draw_width = al_get_bitmap_width(p->sprite) * 0.3;  // ✅ 縮小到 30%
+    float draw_width = al_get_bitmap_width(p->sprite) * 0.3;  //
     float draw_height = al_get_bitmap_height(p->sprite) * 0.3;
 
     al_draw_scaled_bitmap(
         p->sprite,
-        0, 0,                                 // 原圖起點
+        0, 0, 
         al_get_bitmap_width(p->sprite),
         al_get_bitmap_height(p->sprite),
         p->x, p->y,   
-        p->width,         // ✅ 要用這個
-        p->height,                        // 要畫在哪裡
+        p->width,       
+        p->height,                     
         0
     );
 }

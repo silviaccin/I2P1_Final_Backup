@@ -11,7 +11,7 @@ Enemy* New_Enemy(EnemyType type, int direction) {
     e->type = type;
     e->alive = true;
     e->speed = 2.0;
-    e->entered_screen = false;  // ✅ 初始化為尚未進入畫面
+    e->entered_screen = false;  //初始化為尚未進入畫面
 
 
     e->sprite = al_load_bitmap("assets/images/enemy3.png");
@@ -23,13 +23,13 @@ Enemy* New_Enemy(EnemyType type, int direction) {
     case ENEMY_TYPE_SPLIT:
         e->sprite = al_load_bitmap("assets/images/enemy2.png");
         GAME_ASSERT(e->sprite);
-        scale = 0.3;  // 比普通敵人大
+        scale = 0.3;  //比普通敵人大
         break;
     case ENEMY_TYPE_NORMAL:
     default:
         e->sprite = al_load_bitmap("assets/images/enemy1.png");
         GAME_ASSERT(e->sprite);
-        scale = 0.2;  // 小一點
+        scale = 0.2;
         break;
     }
 
@@ -87,7 +87,7 @@ void enemy_update(Enemy* e) {
     e->x += e->dx * e->speed;
     e->y += e->dy * e->speed;
 
-    // ✅ 一旦任何部分進入畫面，就標記為 true
+    // 一旦任何部分進入畫面，就標記為 true
    float cx = e->x + e->width / 2;
    float cy = e->y + e->height / 2;
 
@@ -97,7 +97,7 @@ void enemy_update(Enemy* e) {
         e->entered_screen = true;
     }
 
-    // 超出畫面範圍則標記為死亡（這段你可以保留或依實際需要調整）
+    // 超出畫面範圍標記為死亡
     if (e->x < -e->width || e->x > WINDOW_WIDTH + e->width ||
         e->y < -e->height || e->y > WINDOW_HEIGHT + e->height) {
         e->alive = false;
@@ -114,7 +114,7 @@ void enemy_draw(Enemy* e) {
         al_get_bitmap_width(e->sprite),     // 原圖寬
         al_get_bitmap_height(e->sprite),    // 原圖高
         e->x, e->y,
-        e->width, e->height,                // ✅ 使用 e->width/height
+        e->width, e->height,                // 用 e->width/height
         0
     );
 }

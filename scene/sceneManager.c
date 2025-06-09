@@ -1,4 +1,3 @@
-// scene/sceneManager.c
 #include "sceneManager.h"
 #include "menu.h"
 #include "gamescene.h"

@@ -1,4 +1,3 @@
-// scene/successscene.c
 #include "successscene.h"
 #include "menu.h"
 #include "../global.h"

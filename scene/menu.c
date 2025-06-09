@@ -1,4 +1,3 @@
-// scene/menu.c
 #include "menu.h"
 #include "../global.h"
 #include "../GAME_ASSERT.h"

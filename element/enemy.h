@@ -5,8 +5,8 @@
 #include <stdbool.h>
 
 typedef enum {
-    ENEMY_TYPE_NORMAL = 1,
-    ENEMY_TYPE_SPLIT = 2  // 新增：會分裂的敵人
+    ENEMY_TYPE_NORMAL = 1, //一般敵人
+    ENEMY_TYPE_SPLIT = 2  //細胞分裂敵人
 } EnemyType;
 
 typedef struct {
