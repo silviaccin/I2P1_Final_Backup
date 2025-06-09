@@ -23,6 +23,8 @@
 
 typedef struct {
     ALLEGRO_BITMAP* background;
+    ALLEGRO_SAMPLE* bgm;
+    ALLEGRO_SAMPLE_ID bgm_id;
     ALLEGRO_BITMAP* hp_images[MAX_HP + 1];
     Player* player;
     Enemy* enemies[MAX_ENEMY];
@@ -200,7 +202,7 @@ void game_scene_update(Scene* sc) {
     double elapsed = now - gs->start_time;
     double interval = 1.0;
 
-    // 20 秒後產生分裂型敵人
+    //20 秒後產生分裂型敵人
     if (elapsed >= 20.0 && now - gs->last_split_enemy_time >= 1.5) {
         for (int i = 0; i < 2; i++) {
             int dir = rand() % 4;
@@ -220,12 +222,12 @@ void game_scene_update(Scene* sc) {
             Enemy* e = spawn_split_enemy(dir);
             gs->enemies[gs->enemy_count++] = e;
         } else {
-            spawn_enemy(gs); // 原本的敵人
+            spawn_enemy(gs); //原本的敵人
         }
         gs->last_enemy_time = now;
     }
 
-
+    //檢查每個活著的敵人是否與玩家有碰撞
     for (int i = 0; i < gs->enemy_count; i++) {
         Enemy* e = gs->enemies[i];
         if (e && e->alive && check_collision(gs->player, e)) {
@@ -236,13 +238,13 @@ void game_scene_update(Scene* sc) {
                 left->x = e->x - 10;
                 left->y = e->y;
                 left->sprite = al_load_bitmap("assets/images/enemy3.png");
-                left->entered_screen = false;  // ✅ 一定要重設，不然可能被誤判
+                left->entered_screen = false;  //一定要重設，不然可能被誤判
 
                 Enemy* right = New_Enemy(ENEMY_TYPE_NORMAL, dir2);
                 right->x = e->x + 10;
                 right->y = e->y;
                 right->sprite = al_load_bitmap("assets/images/enemy3.png");
-                right->entered_screen = false;  // ✅ 一定要重設
+                right->entered_screen = false;
 
 
                 left->x = e->x - 10;
@@ -280,6 +282,12 @@ void game_scene_update(Scene* sc) {
 void game_scene_destroy(Scene* sc) {
     GameScene* gs = (GameScene*)(sc->pDerivedObj);
 
+    al_stop_sample(&gs->bgm_id);  // 停止播放
+    if (gs->bgm){
+        al_destroy_sample(gs->bgm);
+        gs->bgm = NULL;
+    }
+    
     if (gs->background)
         al_destroy_bitmap(gs->background);
     if (gs->player)
@@ -340,6 +348,12 @@ Scene* New_GameScene() {
     gs->start_time = al_get_time();
 
     gs->hp = MAX_HP;
+
+    gs->bgm = al_load_sample("assets/sound/bgm.wav");  // ← 請替換為你的檔名與路徑
+    GAME_ASSERT(gs->bgm);
+
+    al_play_sample(gs->bgm, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, &gs->bgm_id);
+
 
     //血條
     for (int i = 1; i <= MAX_HP; i++) {
