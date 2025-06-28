@@ -8,11 +8,13 @@
 
 static Scene* current_scene = NULL;
 
+//初始化場景
 void scene_manager_init(Scene* s) {
     current_scene = s;
     GAME_ASSERT(current_scene);
     printf("[INFO] Initial scene started. Label: %d\n", s->label);
 }
+
 
 void scene_manager_update() {
     if (!current_scene) return;
@@ -44,6 +46,7 @@ void scene_manager_update() {
     }
 }
 
+//呼叫目前場景的scene_draw
 void scene_manager_draw() {
     if (current_scene) {
         current_scene->Draw(current_scene);

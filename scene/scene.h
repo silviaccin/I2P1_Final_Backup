@@ -16,13 +16,13 @@ typedef void (*fptrDestroy)(Scene*);
 struct _Scene {
     int label;
     bool scene_end;
-    void* pDerivedObj;
+    void* pDerivedObj; //場景的具體資料結構
 
     fptrUpdate Update;
     fptrDraw Draw;
     fptrDestroy Destroy;
 
-    Elements* ele_list[MAX_ELEMENT];  // 加上這兩行
+    Elements* ele_list[MAX_ELEMENT];
     int ele_num;
 };
 

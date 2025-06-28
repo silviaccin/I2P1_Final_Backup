@@ -10,7 +10,7 @@ Player* New_Player(float startX, float startY) {
 
     p->x = startX;
     p->y = startY;
-    p->speed = 5;
+    p->speed = 10;
 
     p->sprite = al_load_bitmap("assets/images/player.png");
     GAME_ASSERT(p->sprite);
